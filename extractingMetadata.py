@@ -4,7 +4,7 @@ from PIL.ExifTags import TAGS, GPSTAGS
 import datetime
 
 
-# Function to extract metadata from a photo
+# Extract metadata from a photo
 def extract_metadata(photo_path):
     metadata = {}
     try:
@@ -39,13 +39,14 @@ def extract_metadata(photo_path):
 
     return metadata
 
-# Helper function to convert GPS data to degrees
+
+# Convert GPS data to degrees
 def convert_to_degrees(value):
     d, m, s = value
     return d + (m / 60.0) + (s / 3600.0)
 
-# Function to get latitude
 
+# Get latitude
 def get_latitude(gps_info):
     lat = gps_info.get('GPSLatitude')
     lat_ref = gps_info.get('GPSLatitudeRef')
@@ -55,7 +56,8 @@ def get_latitude(gps_info):
             lat = -lat
     return lat
 
-# Function to get longitude
+
+# Get longitude
 def get_longitude(gps_info):
     lon = gps_info.get('GPSLongitude')
     lon_ref = gps_info.get('GPSLongitudeRef')
@@ -65,7 +67,7 @@ def get_longitude(gps_info):
             lon = -lon
     return lon
 
-# Main function to extract metadata from a directory of photos
+# Extract metadata from a directory of photos - Main function
 def process_photos(directory):
     all_metadata = []
     for root, _, files in os.walk(directory):
@@ -77,12 +79,10 @@ def process_photos(directory):
                 all_metadata.append(metadata)
     return all_metadata
 
-# Example usage
 def main():
     photo_directory = "../photos"
     metadata_list = process_photos(photo_directory)
 
-    # Print extracted metadata
     for metadata in metadata_list:
         print("\nPhoto Metadata:")
         # print(metadata)
