@@ -1,6 +1,6 @@
 from math import radians, sin, cos, sqrt, atan2
 from datetime import datetime
-from extractingMetadata import extract_metadata  # Import from your first file
+from extractingMetadata import extract_metadata
 import os
 
 
@@ -59,7 +59,6 @@ def process_photos_and_check_paths(directory):
             print(f"Comparing {metadata_list[i]['Filename']} and {metadata_list[j]['Filename']}: {message}")
 
 
-# Example usage
 def main():
     photo_directory = "../photos"
     process_photos_and_check_paths(photo_directory)
