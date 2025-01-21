@@ -3,6 +3,7 @@ from PIL import Image
 from PIL.ExifTags import TAGS, GPSTAGS
 import datetime
 
+
 # Function to extract metadata from a photo
 def extract_metadata(photo_path):
     metadata = {}
@@ -78,13 +79,17 @@ def process_photos(directory):
 
 # Example usage
 def main():
-    photo_directory = "./photos"  # Change this to your photos directory
+    photo_directory = "../photos"
     metadata_list = process_photos(photo_directory)
 
     # Print extracted metadata
     for metadata in metadata_list:
         print("\nPhoto Metadata:")
-        print(metadata)
+        # print(metadata)
+        print(f"Filename: {metadata['Filename']}")
+        print(f"Latitude: {metadata.get('Latitude')}")
+        print(f"Longitude: {metadata.get('Longitude')}")
+        print(f"Date and Time: {metadata.get('DateTime')}")
 
 if __name__ == "__main__":
     main()
