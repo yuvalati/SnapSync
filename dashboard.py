@@ -1,10 +1,10 @@
-# Import necessary libraries
 import dash
 from dash import html, dcc
 from dash.dependencies import Input, Output
 import os
 from extractingMetadata import extract_metadata, process_photos
 from checkPaths import process_photos_and_check_paths
+
 
 # Create a Dash application
 app = dash.Dash(__name__)
@@ -14,15 +14,13 @@ app.layout = html.Div([
     html.H1("SnapSync Metadata Comparison Tool"),
     dcc.Input(id='input-folder', type='text', placeholder='Enter folder path...'),
     html.Button('Load and Compare Metadata', id='load-button'),
-    html.Div(id='output-container')
-])
+    html.Div(id='output-container')])
 
 # Define callback to update the output container
 @app.callback(
     Output('output-container', 'children'),
     [Input('load-button', 'n_clicks')],
-    [dash.dependencies.State('input-folder', 'value')]
-)
+    [dash.dependencies.State('input-folder', 'value')])
 def update_output(n_clicks, value):
     if n_clicks and value:
         directory = value
