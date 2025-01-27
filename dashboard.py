@@ -32,6 +32,5 @@ def update_output(n_clicks, value):
     return "Enter a folder path and click the button to load and compare metadata."
 
 
-# Run the app
 if __name__ == '__main__':
     app.run_server(debug=True)

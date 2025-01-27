@@ -1,6 +1,5 @@
 from datetime import datetime
 from math import radians, sin, cos, sqrt, atan2
-import os
 from extractingMetadata import extract_metadata, process_photos
 
 
