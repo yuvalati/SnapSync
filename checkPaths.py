@@ -35,6 +35,7 @@ def check_crossing_paths(metadata1, metadata2, time_threshold=15, distance_thres
 
     return True, f"Paths crossed! Distance: {distance:.2f} meters, Time difference: {time_diff:.2f} minutes."
 
+
 # Function to process photos and check paths
 def process_photos_and_check_paths(directory):
     metadata_list = process_photos(directory)
@@ -43,6 +44,7 @@ def process_photos_and_check_paths(directory):
         for j in range(i + 1, len(metadata_list)):
             result, message = check_crossing_paths(metadata_list[i], metadata_list[j])
             print(f"Comparing {metadata_list[i]['Filename']} and {metadata_list[j]['Filename']}: {message}")
+
 
 def main():
     photo_directory = "../photos"

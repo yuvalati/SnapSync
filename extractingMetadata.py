@@ -10,6 +10,7 @@ def convert_to_degrees(value):
     s = float(value[2].num) / float(value[2].den)
     return d + (m / 60.0) + (s / 3600.0)
 
+
 # Get latitude from EXIF tag
 def get_latitude(tags):
     lat = tags.get('GPS GPSLatitude')
@@ -22,6 +23,7 @@ def get_latitude(tags):
         lat = None
     return lat
 
+
 # Get longitude from EXIF tag
 def get_longitude(tags):
     lon = tags.get('GPS GPSLongitude')
@@ -33,6 +35,7 @@ def get_longitude(tags):
     else:
         lon = None
     return lon
+
 
 # Extract metadata from a photo
 def extract_metadata(photo_path):
@@ -49,6 +52,7 @@ def extract_metadata(photo_path):
         print(f"Error reading metadata from {photo_path}: {e}")
     return metadata
 
+
 # Main function to process a directory of photos
 def process_photos(directory):
     all_metadata = []
@@ -60,6 +64,7 @@ def process_photos(directory):
                 metadata['Filename'] = file
                 all_metadata.append(metadata)
     return all_metadata
+
 
 def main():
     photo_directory = "../photos"

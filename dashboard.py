@@ -16,6 +16,7 @@ app.layout = html.Div([
     html.Button('Load and Compare Metadata', id='load-button'),
     html.Div(id='output-container')])
 
+
 # Define callback to update the output container
 @app.callback(
     Output('output-container', 'children'),
