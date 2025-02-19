@@ -1,37 +1,44 @@
 import dash
-from dash import html, dcc
-from dash.dependencies import Input, Output
-import os
-from extractingMetadata import extract_metadata, process_photos
-from checkPaths import process_photos_and_check_paths
+import dash_bootstrap_components as dbc
+from dash import html
 
+app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
 
-# Create a Dash application
-app = dash.Dash(__name__)
-
-# Define the layout of the app
 app.layout = html.Div([
-    html.H1("SnapSync Metadata Comparison Tool"),
-    dcc.Input(id='input-folder', type='text', placeholder='Enter folder path...'),
-    html.Button('Load and Compare Metadata', id='load-button'),
-    html.Div(id='output-container')])
+    dbc.Navbar(
+        dbc.Container(fluid=True, children=[
+            html.A(
+                dbc.Row(
+                    [
+                        dbc.Col(html.Img(src="Snapsync_logo.jpg", height="30px")),
+                        dbc.Col(dbc.NavbarBrand("SnapSync", href="/"), class_name="ms-2"),
+                    ],
+                    align="center",
+                    class_name="g-0",
+                ),
+                href="/",
+                style={"textDecoration": "none"}
+            ),
+            dbc.Nav(
+                [
+                    dbc.NavItem(dbc.NavLink("Profile", href="/profile")),
+                    dbc.NavItem(dbc.NavLink("Discover", href="/discover")),
+                    dbc.NavItem(dbc.NavLink("About", href="/about")),
+                ],
+                className="ms-auto", navbar=True
+            ),
+        ]),
+        color="primary",
+        dark=True,
+        className="mb-5",
+    ),
+    dbc.Container([
+        dbc.Row([
+            dbc.Col(html.Div("User Profile or Sync Information Here"), md=8),
+            dbc.Col(html.Div("Map or Notifications Here"), md=4)
+        ])
+    ], fluid=True)
+])
 
-
-# Define callback to update the output container
-@app.callback(
-    Output('output-container', 'children'),
-    [Input('load-button', 'n_clicks')],
-    [dash.dependencies.State('input-folder', 'value')])
-def update_output(n_clicks, value):
-    if n_clicks and value:
-        directory = value
-        if os.path.exists(directory):
-            results = process_photos_and_check_paths(directory)
-            return html.Ul([html.Li(f"{result}") for result in results])
-        else:
-            return "The provided folder path does not exist. Please enter a valid path."
-    return "Enter a folder path and click the button to load and compare metadata."
-
-
-if __name__ == '__main__':
+if __name__ == "__main__":
     app.run_server(debug=True)
