@@ -24,7 +24,7 @@ def profile():
         age = request.form['age']
         location = request.form['location']
         users.append({"id": len(users) + 1, "name": name, "age": age, "location": location,
-                      "image": "\static\images\default.png"})
+                      "image": "\static\images\default.jpg"})
         return redirect(url_for('connections'))
     return render_template('profile.html')
 

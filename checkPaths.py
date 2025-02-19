@@ -46,6 +46,28 @@ def process_photos_and_check_paths(directory):
             print(f"Comparing {metadata_list[i]['Filename']} and {metadata_list[j]['Filename']}: {message}")
 
 
+def process_photos_and_check_paths_2directories(directory1, directory2):
+    metadata_list1 = process_photos(directory1)
+    metadata_list2 = process_photos(directory2)
+
+    crossed_paths = []
+
+    # Compare each pair of photos between two different directories
+    for meta1 in metadata_list1:
+        for meta2 in metadata_list2:
+            result, message = check_crossing_paths(meta1, meta2)
+            if result:
+                # Append the result along with descriptive information
+                crossed_paths.append({
+                    'File1': meta1['Filename'],
+                    'File2': meta2['Filename'],
+                    'Message': message
+                })
+                print(f"Comparing {meta1['Filename']} and {meta2['Filename']}: {message}")
+
+    return crossed_paths
+
+
 def main():
     photo_directory = "../photos"
     process_photos_and_check_paths(photo_directory)
