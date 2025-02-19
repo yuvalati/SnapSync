@@ -5,7 +5,9 @@ app = Flask(__name__)
 # Dummy data for demonstration
 users = [
     {"id": 1, "name": "Alice", "age": 29, "location": "Tel Aviv"},
-    {"id": 2, "name": "Bob", "age": 24, "location": "Tel Aviv"}
+    {"id": 2, "name": "Bob", "age": 25, "location": "Tel Aviv"},
+    {"id": 3, "name": "Messi", "age": 24, "location": "Tel Aviv"},
+    {"id": 4, "name": "adele", "age": 27, "location": "Tel Aviv"}
 ]
 
 @app.route('/')

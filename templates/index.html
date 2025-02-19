@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Welcome to SnapSync</title>
+    <!-- Link your custom CSS -->
     <link rel="stylesheet" href="/static/css/style.css">
 </head>
 <body>
@@ -10,9 +11,38 @@
         <img src="/static/images/Snapsync_logo.jpg" alt="SnapSync Logo" id="logo">
         <h1>SnapSync</h1>
     </div>
+
+    <!-- Login Form Section -->
+    <div class="login-container">
+        <h2>Login</h2>
+        <form action="/login" method="POST">
+            <label for="username">Username</label>
+            <input
+                type="text"
+                id="username"
+                name="username"
+                placeholder="Enter your username"
+                required
+            >
+
+            <label for="password">Password</label>
+            <input
+                type="password"
+                id="password"
+                name="password"
+                placeholder="Enter your password"
+                required
+            >
+
+            <button type="submit" class="btn login-btn">Login</button>
+        </form>
+    </div>
+
+    <!-- Main Section -->
     <div class="main">
         <p>Connect with people you've crossed paths with.</p>
-        <a href="/profile">Create Your Profile</a>
+        <!-- Keep the same functionality but rename the link -->
+        <a href="/profile" class="btn register-btn">Register</a>
     </div>
 </body>
 </html>
