@@ -10,9 +10,11 @@ users = [
     {"id": 4, "name": "adele", "age": 27, "location": "Tel Aviv", "image": "/static/images/adele.jpg"},
 ]
 
+
 @app.route('/')
 def index():
     return render_template('index.html')
+
 
 @app.route('/profile', methods=['GET', 'POST'])
 def profile():
@@ -21,13 +23,23 @@ def profile():
         name = request.form['name']
         age = request.form['age']
         location = request.form['location']
-        users.append({"id": len(users)+1, "name": name, "age": age, "location": location})
+        users.append({"id": len(users) + 1, "name": name, "age": age, "location": location,
+                      "image": "\static\images\default.png"})
         return redirect(url_for('connections'))
     return render_template('profile.html')
 
+
 @app.route('/connections')
 def connections():
-    return render_template('connections.html', users=users)
+    # Assume the first user in the list is "my profile"
+    if users:
+        my_profile = users[-1]
+        other_users = users[0:-1]
+    else:
+        my_profile = None
+        other_users = []
+    return render_template('connections.html', my_profile=my_profile, users=other_users)
+
 
 if __name__ == '__main__':
     app.run(debug=True)

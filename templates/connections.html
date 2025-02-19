@@ -1,15 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Find Connections</title>
+  <meta charset="UTF-8">
+  <title>Connections</title>
+  <!-- Link to your CSS file -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style_connection.css') }}">
 </head>
 <body>
-    <h1>Your Connections</h1>
-    <ul>
+
+  <div class="container">
+
+    <!-- Left Column: My Profile -->
+    <div class="profile-section">
+      {% if my_profile %}
+      <div class="profile-header">
+        <img src="{{ my_profile.image }}" alt="{{ my_profile.name }}" class="profile-img">
+        <h2 class="profile-name">{{ my_profile.name }}</h2>
+        <p class="profile-location">{{ my_profile.location }}</p>
+      </div>
+      {% else %}
+      <p>No profile found. Please create a profile.</p>
+      {% endif %}
+    </div>
+
+    <!-- Right Column: Suggested Users -->
+    <div class="suggestions-section">
+      <h3>Suggested for You</h3>
+
+      <!-- Loop through the other users -->
+      <div class="suggestions-list">
         {% for user in users %}
-        <li>{{ user.name }} from {{ user.location }}</li>
+        <div class="suggestion-row">
+          <img src="{{ user.image }}" alt="{{ user.name }}" class="small-img">
+
+          <div class="info">
+            <!-- Name + Add Friend on the same line -->
+            <div class="user-top-row">
+              <span class="username">{{ user.name }}</span>
+              <a href="#" class="action-btn">Add Friend</a>
+            </div>
+            <!-- Location underneath -->
+            <div class="location">{{ user.location }}</div>
+          </div>
+        </div>
         {% endfor %}
-    </ul>
+      </div>
+    </div>
+
+  </div>
 </body>
 </html>

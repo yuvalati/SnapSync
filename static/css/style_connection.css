@@ -1,0 +1,116 @@
+/* style_connection.css */
+
+/* Reset some defaults */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Body styling */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #fafafa;
+  color: #333;
+}
+
+/* Main container with 2 columns */
+.container {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* Left column: My profile */
+.profile-section {
+  width: 30%;
+  background: #fff;
+  padding: 20px;
+  box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+}
+
+.profile-header {
+  text-align: center;
+}
+
+/* My profile image (bigger circle) */
+.profile-img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-bottom: 1rem;
+}
+
+.profile-name {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.profile-location {
+  font-size: 0.9rem;
+  color: #8e8e8e;
+}
+
+/* Right column: Suggestions */
+.suggestions-section {
+  flex: 1;
+  padding: 20px;
+}
+
+.suggestions-section h3 {
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+}
+
+/* Each suggestion row */
+.suggestion-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+/* Smaller circle for suggested users */
+.small-img {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 10px;
+}
+
+/* Info container: name + location */
+.info {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Top row: username + Add Friend button side by side */
+.user-top-row {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* space between name and button */
+}
+
+.username {
+  font-weight: bold;
+  font-size: 0.9rem;
+}
+
+.location {
+  font-size: 0.8rem;
+  color: #8e8e8e;
+  margin-top: 2px; /* small gap above location */
+}
+
+/* "Add Friend" link near the username */
+.action-btn {
+  font-size: 0.85rem;
+  color: #0095f6;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.action-btn:hover {
+  text-decoration: underline;
+}
