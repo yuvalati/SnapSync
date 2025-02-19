@@ -1,19 +1,38 @@
-/* /static/css/style.css */
+/* /static/css/style_profile.css */
 body, html {
     height: 100%;  /* Full height for the body and html */
     margin: 0;
     padding: 0;
     display: flex;
-    justify-content: center;
-    align-items: center; /* Center content vertically and horizontally */
+    flex-direction: column; /* Changed to column to accommodate the full-page layout */
+    align-items: center; /* Center content horizontally */
     font-family: 'Gisha', sans-serif;
     background-color: #f4f4f9;
 }
 
+.header {
+    width: 375%;
+    display: flex;
+    align-items: center;
+    background-color: #333;  /* Dark header */
+    padding: 1rem;
+}
+
+#logo {
+    height: 100px;  /* Logo size */
+    margin-right: 1rem;
+}
+
+.header h1 {
+    color: #fff;  /* White color for header text */
+    font-size: 1.8rem;  /* Slightly larger font size */
+}
+
 .main-content {
-    width: 1000%;
-    max-width: 400px;
-    padding: 50px;
+    width: 100%;  /* Full width */
+    max-width: 400px;  /* Maximum width */
+    margin-top: 2rem;  /* Added margin top for spacing from header */
+    padding: 50px;  /* Increased padding */
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
     background-color: white;
     border-radius: 8px;
@@ -42,9 +61,11 @@ label {
 
 input[type="text"],
 input[type="number"],
-input[type="password"] {
+input[type="password"],
+input[type="checkbox"] {
     width: 100%;
     padding: 10px;
+    margin-bottom: 1rem;
     border: 1px solid #ccc;
     border-radius: 4px;
 }
@@ -61,4 +82,14 @@ button {
 
 button:hover {
     background-color: #007bff;
+}
+
+form p {
+    text-align: left; /* Centers the policy link for better appearance */
+    margin-top: 20px; /* Adds space above the policy link */
+}
+
+a {
+    color: #0056b3; /* Matches your button color */
+    text-decoration: none; /* Removes underline */
 }
