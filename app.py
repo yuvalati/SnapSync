@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for
+from checkPaths import process_photos_and_check_paths_2directories
 
 app = Flask(__name__)
 
