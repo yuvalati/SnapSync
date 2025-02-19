@@ -1,0 +1,39 @@
+/* /static/css/style.css */
+body {
+    font-family: 'Gisha', sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 0;
+}
+
+.header {
+    background-color: #0056b3;
+    color: white;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+}
+
+.header img {
+    height: 50px;
+    margin-right: 20px;
+}
+
+.main {
+    padding: 20px;
+    text-align: center;
+}
+
+a {
+    display: inline-block;
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+
+a:hover {
+    background-color: #0056b3;
+}
