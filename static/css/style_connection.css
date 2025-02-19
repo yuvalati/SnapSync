@@ -14,7 +14,7 @@ body {
   color: #333;
 }
 
-/* Main container with 2 columns */
+/* Container with 3 columns: My profile (left), Suggestions (middle), Detail (right) */
 .container {
   display: flex;
   min-height: 100vh;
@@ -22,10 +22,11 @@ body {
 
 /* Left column: My profile */
 .profile-section {
-  width: 30%;
+  width: 25%;
   background: #fff;
   padding: 20px;
   box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+  border-right: 1px solid #ddd;
 }
 
 .profile-header {
@@ -52,10 +53,11 @@ body {
   color: #8e8e8e;
 }
 
-/* Right column: Suggestions */
+/* Middle column: Suggestions */
 .suggestions-section {
-  flex: 1;
+  width: 25%;
   padding: 20px;
+  border-right: 1px solid #ddd;
 }
 
 .suggestions-section h3 {
@@ -103,7 +105,7 @@ body {
   margin-top: 2px; /* small gap above location */
 }
 
-/* "Add Friend" link near the username */
+/* Add Friend link near the username */
 .action-btn {
   font-size: 0.85rem;
   color: #0095f6;
@@ -113,4 +115,82 @@ body {
 
 .action-btn:hover {
   text-decoration: underline;
+}
+
+/* When approved, style it in gray */
+.action-btn.approved {
+  background-color: #ccc;
+  color: #fff;
+  padding: 3px 8px;
+  border-radius: 4px;
+  text-decoration: none;
+  cursor: default;
+}
+
+/* Right column: Detailed user view */
+.detail-section {
+  flex: 1; /* Fill remaining space */
+  padding: 20px;
+}
+
+.user-detail-placeholder {
+  margin-top: 20px;
+  text-align: center;
+  color: #888;
+}
+
+/* Card for the selected user's profile */
+.user-detail-card {
+  max-width: 400px;
+  margin: 0 auto; /* center horizontally */
+  text-align: center;
+}
+
+.detail-img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 1rem;
+}
+
+.detail-name {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.detail-location {
+  font-size: 0.9rem;
+  color: #8e8e8e;
+  margin-bottom: 1rem;
+}
+
+/* Tabs styling */
+.tabs {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.tab-btn {
+  background: none;
+  border: 1px solid #ccc;
+  padding: 6px 12px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  border-radius: 4px;
+}
+
+.tab-btn:hover {
+  background-color: #f0f0f0;
+}
+
+.tab-content {
+  text-align: left;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 10px;
 }

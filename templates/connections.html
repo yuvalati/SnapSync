@@ -23,7 +23,7 @@
       {% endif %}
     </div>
 
-    <!-- Right Column: Suggested Users -->
+    <!-- Middle Column: Suggested Users -->
     <div class="suggestions-section">
       <h3>Suggested for You</h3>
 
@@ -31,15 +31,20 @@
       <div class="suggestions-list">
         {% for user in users %}
         <div class="suggestion-row">
+          <!-- Small circular image -->
           <img src="{{ user.image }}" alt="{{ user.name }}" class="small-img">
 
+          <!-- User info -->
           <div class="info">
-            <!-- Name + Add Friend on the same line -->
             <div class="user-top-row">
               <span class="username">{{ user.name }}</span>
-              <a href="#" class="action-btn">Add Friend</a>
+              <!-- "Add Friend" button calls our JavaScript function -->
+              <a href="#"
+                 class="action-btn"
+                 onclick="addFriend(event, '{{ user.id }}', '{{ user.name }}', '{{ user.image }}', '{{ user.location }}')">
+                 Add Friend
+              </a>
             </div>
-            <!-- Location underneath -->
             <div class="location">{{ user.location }}</div>
           </div>
         </div>
@@ -47,6 +52,62 @@
       </div>
     </div>
 
+    <!-- Right Column: Detailed View of the Selected User -->
+    <div class="detail-section" id="detail-section">
+      <!-- By default, show a placeholder message -->
+      <div class="user-detail-placeholder">
+        <p>Select a user to view their profile.</p>
+      </div>
+    </div>
+
   </div>
+
+  <!-- JavaScript for dynamic button & user detail -->
+  <script>
+    function addFriend(event, userId, userName, userImage, userLocation) {
+      event.preventDefault();
+
+      // 1. Change the button text to "Approved" and style to gray
+      const btn = event.target;
+      btn.textContent = "Approved";
+      btn.classList.add("approved");
+      btn.removeAttribute("href");
+      btn.style.pointerEvents = "none"; // disable clicking again
+
+      // 2. Display the selected user detail in the right column
+      const detailSection = document.getElementById("detail-section");
+      detailSection.innerHTML = `
+        <div class="user-detail-card">
+          <img src="${userImage}" alt="${userName}" class="detail-img">
+          <h2 class="detail-name">${userName}</h2>
+          <p class="detail-location">${userLocation}</p>
+
+          <!-- Tabs -->
+          <div class="tabs">
+            <button class="tab-btn" onclick="showTab('posts')">Posts</button>
+            <button class="tab-btn" onclick="showTab('crosspaths')">Cross Paths</button>
+          </div>
+
+          <!-- Tab contents -->
+          <div class="tab-content" id="posts">
+            <p>Posts content goes here...</p>
+          </div>
+          <div class="tab-content" id="crosspaths" style="display: none;">
+            <p>Cross Paths content goes here...</p>
+          </div>
+        </div>
+      `;
+    }
+
+    // Simple tab switching function
+    function showTab(tabId) {
+      // Hide all tabs first
+      document.getElementById("posts").style.display = "none";
+      document.getElementById("crosspaths").style.display = "none";
+
+      // Show the chosen tab
+      document.getElementById(tabId).style.display = "block";
+    }
+  </script>
 </body>
 </html>
