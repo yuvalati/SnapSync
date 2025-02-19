@@ -27,7 +27,7 @@
     <div class="suggestions-section">
       <h3>Suggested for You</h3>
 
-      <!-- Loop through the other users -->
+      <!-- Loop through other users -->
       <div class="suggestions-list">
         {% for user in users %}
         <div class="suggestion-row">
@@ -37,12 +37,22 @@
           <!-- User info -->
           <div class="info">
             <div class="user-top-row">
-              <span class="username">{{ user.name }}</span>
-              <!-- "Add Friend" button calls our JavaScript function -->
-              <a href="#"
-                 class="action-btn"
-                 onclick="addFriend(event, '{{ user.id }}', '{{ user.name }}', '{{ user.image }}', '{{ user.location }}')">
-                 Add Friend
+              <!-- Clicking this name will show the detail on the right -->
+              <a
+                href="#"
+                class="username-link"
+                onclick="showUserDetail(event, '{{ user.id }}', '{{ user.name }}', '{{ user.image }}', '{{ user.location }}')"
+              >
+                {{ user.name }}
+              </a>
+
+              <!-- "Add Friend" button calls our JS function to approve friend -->
+              <a
+                href="#"
+                class="action-btn"
+                onclick="approveFriend(event)"
+              >
+                Add Friend
               </a>
             </div>
             <div class="location">{{ user.location }}</div>
@@ -64,17 +74,25 @@
 
   <!-- JavaScript for dynamic button & user detail -->
   <script>
-    function addFriend(event, userId, userName, userImage, userLocation) {
+    /**
+     * Changes the "Add Friend" button to "Approved" in gray
+     */
+    function approveFriend(event) {
       event.preventDefault();
-
-      // 1. Change the button text to "Approved" and style to gray
       const btn = event.target;
       btn.textContent = "Approved";
       btn.classList.add("approved");
+      // Disable further clicks
       btn.removeAttribute("href");
-      btn.style.pointerEvents = "none"; // disable clicking again
+      btn.style.pointerEvents = "none";
+    }
 
-      // 2. Display the selected user detail in the right column
+    /**
+     * Displays the selected user's profile on the right side
+     */
+    function showUserDetail(event, userId, userName, userImage, userLocation) {
+      event.preventDefault();
+
       const detailSection = document.getElementById("detail-section");
       detailSection.innerHTML = `
         <div class="user-detail-card">
@@ -99,13 +117,14 @@
       `;
     }
 
-    // Simple tab switching function
+    /**
+     * Simple tab switching function
+     */
     function showTab(tabId) {
-      // Hide all tabs first
+      // Hide both tabs
       document.getElementById("posts").style.display = "none";
       document.getElementById("crosspaths").style.display = "none";
-
-      // Show the chosen tab
+      // Show the one we want
       document.getElementById(tabId).style.display = "block";
     }
   </script>

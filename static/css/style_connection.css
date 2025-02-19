@@ -14,7 +14,7 @@ body {
   color: #333;
 }
 
-/* Container with 3 columns: My profile (left), Suggestions (middle), Detail (right) */
+/* Container with 3 columns (left: my profile, middle: suggestions, right: detail) */
 .container {
   display: flex;
   min-height: 100vh;
@@ -33,7 +33,6 @@ body {
   text-align: center;
 }
 
-/* My profile image (bigger circle) */
 .profile-img {
   width: 100px;
   height: 100px;
@@ -65,14 +64,12 @@ body {
   font-size: 1.1rem;
 }
 
-/* Each suggestion row */
 .suggestion-row {
   display: flex;
   align-items: center;
   margin-bottom: 15px;
 }
 
-/* Smaller circle for suggested users */
 .small-img {
   width: 45px;
   height: 45px;
@@ -81,31 +78,36 @@ body {
   margin-right: 10px;
 }
 
-/* Info container: name + location */
 .info {
   display: flex;
   flex-direction: column;
 }
 
-/* Top row: username + Add Friend button side by side */
 .user-top-row {
   display: flex;
   align-items: center;
-  gap: 10px; /* space between name and button */
+  gap: 10px; /* space between the name link and friend button */
 }
 
-.username {
+/* Make the name a clickable link */
+.username-link {
   font-weight: bold;
   font-size: 0.9rem;
+  text-decoration: none;
+  color: #000; /* black, or choose your color */
+}
+.username-link:hover {
+  text-decoration: underline;
+  color: #0095f6;
 }
 
 .location {
   font-size: 0.8rem;
   color: #8e8e8e;
-  margin-top: 2px; /* small gap above location */
+  margin-top: 2px;
 }
 
-/* Add Friend link near the username */
+/* Add Friend button */
 .action-btn {
   font-size: 0.85rem;
   color: #0095f6;
@@ -117,7 +119,7 @@ body {
   text-decoration: underline;
 }
 
-/* When approved, style it in gray */
+/* "Approved" state turns the button gray */
 .action-btn.approved {
   background-color: #ccc;
   color: #fff;
@@ -129,7 +131,7 @@ body {
 
 /* Right column: Detailed user view */
 .detail-section {
-  flex: 1; /* Fill remaining space */
+  flex: 1; /* Fills remaining space */
   padding: 20px;
 }
 
@@ -139,7 +141,7 @@ body {
   color: #888;
 }
 
-/* Card for the selected user's profile */
+/* Detailed user card */
 .user-detail-card {
   max-width: 400px;
   margin: 0 auto; /* center horizontally */
@@ -182,7 +184,6 @@ body {
   font-size: 0.9rem;
   border-radius: 4px;
 }
-
 .tab-btn:hover {
   background-color: #f0f0f0;
 }
