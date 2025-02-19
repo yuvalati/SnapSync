@@ -12,11 +12,13 @@ body {
     padding: 10px 20px;
     display: flex;
     align-items: center;
+    width: 100%; /* Ensures the header extends full width */
 }
 
-.header img {
-    height: 50px;
-    margin-right: 20px;
+#logo {
+    height: 100px; /* Set the height you prefer */
+    width: 100px; /* Ensure the width is the same as height for a square */
+    margin-right: 10px;
 }
 
 .main {
