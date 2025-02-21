@@ -195,3 +195,75 @@ body {
   border-radius: 4px;
   padding: 10px;
 }
+
+/* Make the cross table modern looking */
+.cross-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+  font-size: 0.9rem;
+  text-align: left;
+}
+
+.cross-table th,
+.cross-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+.cross-table thead {
+  background-color: #f2f2f2;
+}
+
+.cross-table th {
+  font-weight: bold;
+}
+
+/* Map Icon Button */
+.map-icon-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px 6px;
+}
+
+.map-icon {
+  width: 24px;
+  height: 24px;
+}
+
+/* MODAL STYLES */
+.map-modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 9999; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.5); /* Black w/ partial opacity */
+}
+
+.map-modal-content {
+  background-color: #fff;
+  margin: 10% auto; /* 10% from top, centered horizontally */
+  padding: 30px;
+  border-radius: 6px;
+  width: 70%;       /* Could be any appropriate size */
+  max-width: 800px; /* Limit the max width */
+  position: relative;
+}
+
+.close-btn {
+  color: #aaa;
+  font-size: 28px;
+  font-weight: bold;
+  position: absolute;
+  right: 15px;
+  top: 10px;
+  cursor: pointer;
+}
+
+.close-btn:hover {
+  color: #000;
+}

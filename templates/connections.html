@@ -3,8 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <title>Connections</title>
-  <!-- Link to your CSS file -->
+
+  <!-- Link to your main CSS file -->
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style_connection.css') }}">
+
+  <!-- Leaflet CSS/JS for the interactive map modal (no integrity/crossorigin) -->
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+  />
+  <script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+  ></script>
 </head>
 <body>
 
@@ -41,7 +51,7 @@
               <a
                 href="#"
                 class="username-link"
-                onclick="showUserDetail(event, '{{ user.id }}', '{{ user.name }}', '{{ user.image }}', '{{ user.location }}')"
+                onclick="showUserDetail(event, {{ user.id }}, '{{ user.name }}', '{{ user.image }}', '{{ user.location }}')"
               >
                 {{ user.name }}
               </a>
@@ -50,7 +60,7 @@
               <a
                 href="#"
                 class="action-btn"
-                onclick="approveFriend(event)"
+                onclick="approveFriend(event, {{ user.id }})"
               >
                 Add Friend
               </a>
@@ -72,23 +82,43 @@
 
   </div>
 
+  <!-- MAP MODAL (hidden by default) -->
+  <div id="mapModal" class="map-modal">
+    <div class="map-modal-content">
+      <span class="close-btn" onclick="closeMapModal()">&times;</span>
+      <div id="mapContainer" style="width: 100%; height: 400px;"></div>
+    </div>
+  </div>
+
   <!-- JavaScript for dynamic button & user detail -->
   <script>
+    // Keep a global reference to the Leaflet map so we can remove() it each time
+    let map = null;
+
     /**
-     * Changes the "Add Friend" button to "Approved" in gray
+     * POST to /add_friend/<friend_id> to store friend relationship & do cross-path check.
+     * No alert or pop-up for crossing. We only see it in "Cross Paths" tab.
      */
-    function approveFriend(event) {
+    function approveFriend(event, friendId) {
       event.preventDefault();
       const btn = event.target;
-      btn.textContent = "Approved";
-      btn.classList.add("approved");
-      // Disable further clicks
-      btn.removeAttribute("href");
-      btn.style.pointerEvents = "none";
+
+      fetch(`/add_friend/${friendId}`, {
+        method: "POST"
+      })
+      .then(response => response.json())
+      .then(data => {
+        // 1) Update button text/style
+        btn.textContent = "Approved";
+        btn.classList.add("approved");
+        btn.removeAttribute("href");
+        btn.style.pointerEvents = "none";
+      })
+      .catch(err => console.error(err));
     }
 
     /**
-     * Displays the selected user's profile on the right side
+     * Displays the selected user's profile on the right side, with two tabs: Posts & Cross Paths
      */
     function showUserDetail(event, userId, userName, userImage, userLocation) {
       event.preventDefault();
@@ -103,7 +133,7 @@
           <!-- Tabs -->
           <div class="tabs">
             <button class="tab-btn" onclick="showTab('posts')">Posts</button>
-            <button class="tab-btn" onclick="showTab('crosspaths')">Cross Paths</button>
+            <button class="tab-btn" onclick="loadCrossPaths(${userId})">Cross Paths</button>
           </div>
 
           <!-- Tab contents -->
@@ -111,21 +141,153 @@
             <p>Posts content goes here...</p>
           </div>
           <div class="tab-content" id="crosspaths" style="display: none;">
-            <p>Cross Paths content goes here...</p>
+            <p>Loading cross paths...</p>
           </div>
         </div>
       `;
     }
 
     /**
-     * Simple tab switching function
+     * Show/hide tabs
      */
     function showTab(tabId) {
-      // Hide both tabs
       document.getElementById("posts").style.display = "none";
       document.getElementById("crosspaths").style.display = "none";
-      // Show the one we want
       document.getElementById(tabId).style.display = "block";
+    }
+
+    /**
+     * Load crossing path data into the Cross Paths tab
+     */
+    function loadCrossPaths(friendId) {
+      // Switch to crosspaths tab
+      showTab('crosspaths');
+      const crosspathsDiv = document.getElementById("crosspaths");
+      crosspathsDiv.innerHTML = "<p>Loading cross paths...</p>";
+
+      fetch(`/cross_paths/${friendId}`)
+        .then(response => response.json())
+        .then(data => {
+          if (!data.crossed_paths || data.crossed_paths.length === 0) {
+            crosspathsDiv.innerHTML = "<p>No crossing paths found.</p>";
+          } else {
+            let html = `
+              <table class="cross-table">
+                <thead>
+                  <tr>
+                    <th>File (You)</th>
+                    <th>File (Friend)</th>
+                    <th>Details</th>
+                    <th>Map</th>
+                  </tr>
+                </thead>
+                <tbody>
+            `;
+            data.crossed_paths.forEach(item => {
+              const lat1 = item.Lat1;
+              const lon1 = item.Lon1;
+              const lat2 = item.Lat2;
+              const lon2 = item.Lon2;
+
+              html += `
+                <tr>
+                  <td>${item.File1}</td>
+                  <td>${item.File2}</td>
+                  <td>${item.Message}</td>
+                  <td>
+                    <button
+                      class="map-icon-btn"
+                      onclick="openMapModal(${lat1}, ${lon1}, ${lat2}, ${lon2})"
+                    >
+                      <img src="/static/images/map_icon.png" alt="Map" class="map-icon">
+                    </button>
+                  </td>
+                </tr>
+              `;
+            });
+            html += "</tbody></table>";
+
+            crosspathsDiv.innerHTML = html;
+          }
+        })
+        .catch(err => {
+          console.error(err);
+          crosspathsDiv.innerHTML = "<p>Error loading cross paths.</p>";
+        });
+    }
+
+    /**
+     * Open the map modal with Leaflet, placing markers at lat1/lon1 and lat2/lon2 if they exist.
+     */
+    function openMapModal(lat1, lon1, lat2, lon2) {
+      // Show the modal so the container has layout
+      const modal = document.getElementById("mapModal");
+      modal.style.display = "block";
+
+      // 1) If a previous map instance exists, remove it
+      if (map) {
+        map.remove();
+        map = null;
+      }
+
+      // 2) Clear any leftover HTML inside mapContainer
+      const mapContainer = document.getElementById("mapContainer");
+      mapContainer.innerHTML = "";
+
+      // 3) Create a new Leaflet map
+      map = L.map("mapContainer").setView([0, 0], 2);
+
+      // Use an alternate tile source (tile.openstreetmap.fr/hot)
+      L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
+        maxZoom: 19
+      }).addTo(map);
+
+      const latlngs = [];
+
+      // If lat1/lon1 is valid
+      if (lat1 != null && lon1 != null) {
+        L.marker([lat1, lon1]).addTo(map)
+          .bindPopup("Current user photo location");
+        latlngs.push([lat1, lon1]);
+      }
+      // If lat2/lon2 is valid
+      if (lat2 != null && lon2 != null) {
+        L.marker([lat2, lon2]).addTo(map)
+          .bindPopup("Friend photo location");
+        latlngs.push([lat2, lon2]);
+      }
+
+      // If no valid coords
+      if (latlngs.length === 0) {
+        map.setView([0, 0], 2);
+        L.popup()
+          .setLatLng([0, 0])
+          .setContent("No GPS data found for these images.")
+          .openOn(map);
+      } else {
+        map.fitBounds(latlngs, { maxZoom: 15 });
+      }
+
+      // Force Leaflet to recalc map size after it’s visible
+      setTimeout(() => {
+        map.invalidateSize();
+      }, 100);
+    }
+
+    /**
+     * Close the map modal
+     */
+    function closeMapModal() {
+      const modal = document.getElementById("mapModal");
+      modal.style.display = "none";
+    }
+
+    // Close modal if user clicks anywhere outside of it
+    window.onclick = function(event) {
+      const modal = document.getElementById("mapModal");
+      if (event.target === modal) {
+        modal.style.display = "none";
+      }
     }
   </script>
 </body>
