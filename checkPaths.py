@@ -56,7 +56,7 @@ def check_crossing_paths(metadata1, metadata2, time_threshold=15, distance_thres
 
     # If we made it here, it's a crossing
     return True, {
-        "message": f"Paths crossed! Distance: {distance:.2f}m, Time diff: {time_diff:.2f} min.",
+        "message": f"Distance: {distance:.2f}m\n Time diff: {time_diff:.2f} min.",
         "lat1": lat1,
         "lon1": lon1,
         "lat2": lat2,

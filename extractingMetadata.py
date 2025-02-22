@@ -1,5 +1,6 @@
 import os
 import exifread
+import requests
 
 
 # Convert GPS data to degrees from the exifread tags format
@@ -35,6 +36,17 @@ def get_longitude(tags):
     else:
         lon = None
     return lon
+
+
+def geocode_location(lat, lon):
+    # This is a placeholder function. You'll need an actual API key and use a real geocoding service.
+    response = requests.get(f"https://api.opencagedata.com/geocode/v1/json?q={lat}+{lon}&key=YOUR_API_KEY")
+    data = response.json()
+    if data['results']:
+        city = data['results'][0]['components']['city']
+        country = data['results'][0]['components']['country']
+        return city, country
+    return None, None
 
 
 # Extract metadata from a photo
