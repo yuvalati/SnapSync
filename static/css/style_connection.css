@@ -7,6 +7,25 @@
   box-sizing: border-box;
 }
 
+/* Header styling to match other pages */
+.header {
+  display: flex;
+  align-items: center;
+  background: #333;
+  padding: 1rem;
+}
+
+#logo {
+  height: 100px;
+  margin-right: 1rem;
+}
+
+.header h1 {
+  color: #fff;
+  font-size: 1.8rem;
+  margin: 0;
+}
+
 /* Body styling */
 body {
   font-family: Arial, sans-serif;
@@ -27,6 +46,9 @@ body {
   padding: 20px;
   box-shadow: 2px 0 5px rgba(0,0,0,0.1);
   border-right: 1px solid #ddd;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 }
 
 .profile-header {
@@ -50,6 +72,30 @@ body {
 .profile-location {
   font-size: 0.9rem;
   color: #8e8e8e;
+}
+
+/* Logout Button Container */
+.logout-btn-container {
+  text-align: center; /* Center the logout within this column */
+  margin-top: auto;        /* pushes the logout button to the bottom */
+  display: flex;           /* allows flex alignment */
+  justify-content: center;
+}
+
+.logout-btn {
+  display: inline-block;
+  background-color: #903474; /* Purple background */
+  color: #fff;
+  padding: 10px 20px;
+  text-decoration: none;
+  font-size: 0.9rem;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+}
+
+.logout-btn:hover {
+  background-color: #6b2856;
 }
 
 /* Middle column: Suggestions */
@@ -89,41 +135,28 @@ body {
   gap: 10px; /* space between the name link and friend button */
 }
 
-/* Make the name a clickable link */
-.username-link {
-  font-weight: bold;
-  font-size: 0.9rem;
-  text-decoration: none;
-  color: #000; /* black, or choose your color */
-}
-.username-link:hover {
-  text-decoration: underline;
-  color: #0095f6;
-}
-
-.location {
-  font-size: 0.8rem;
-  color: #8e8e8e;
-  margin-top: 2px;
-}
-
-/* Add Friend button */
+/* "Add Friend" button -> Purple background */
 .action-btn {
-  font-size: 0.85rem;
-  color: #0095f6;
+  background-color: #903474;
+  color: #fff;
   text-decoration: none;
   font-weight: 600;
+  padding: 6px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  border: none;
+  font-size: 0.85rem;
 }
-
 .action-btn:hover {
-  text-decoration: underline;
+  background-color: #6b2856;
+  text-decoration: none;
 }
 
 /* "Approved" state turns the button gray */
 .action-btn.approved {
   background-color: #ccc;
   color: #fff;
-  padding: 3px 8px;
+  padding: 6px 10px;
   border-radius: 4px;
   text-decoration: none;
   cursor: default;
@@ -196,7 +229,7 @@ body {
   padding: 10px;
 }
 
-/* Make the cross table modern looking */
+/* Make the cross (sync) table modern looking */
 .cross-table {
   width: 100%;
   border-collapse: collapse;
@@ -249,8 +282,8 @@ body {
   margin: 10% auto; /* 10% from top, centered horizontally */
   padding: 30px;
   border-radius: 6px;
-  width: 70%;       /* Could be any appropriate size */
-  max-width: 800px; /* Limit the max width */
+  width: 70%;
+  max-width: 800px;
   position: relative;
 }
 

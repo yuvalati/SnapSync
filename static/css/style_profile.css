@@ -1,3 +1,6 @@
+/* style_profile.css */
+
+/* Basic resets */
 * {
     margin: 0;
     padding: 0;
@@ -17,8 +20,8 @@ body {
     align-items: center;
     background: #333;
     padding: 1rem;
-    width: 100%;       /* Ensures full-width header */
-    max-width: 100%;   /* Prevents overflow */
+    width: 100%;
+    max-width: 100%;
 }
 
 #logo {
@@ -32,17 +35,44 @@ body {
     margin: 0;
 }
 
-/* Main content container for the form */
-.main-content {
-    max-width: 500px;  /* Controls form width */
-    margin: 2rem auto; /* Centers form horizontally with margin auto */
-    padding: 50px;
-    background-color: #fff;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    border-radius: 8px;
+/* Layout row for ads + main-content container */
+.layout-row {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;    /* <--- Ensures children stretch to match the tallest element */
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 1rem auto;       /* <--- Reduced top margin to move content higher up */
+    padding: 0 1rem;
 }
 
-h1 {
+/* Vertical ads on left and right */
+.vertical-ad {
+    width: 200px;
+    background-color: #eee;
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+
+    display: flex;           /* Keep content centered if multi-line */
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+
+    padding: 1rem;
+    /* No min-height here so the ads match the main content's height */
+}
+
+/* Main content container for the form */
+.main-content {
+    background-color: #fff;
+    padding: 50px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    border-radius: 8px;
+    width: 500px;            /* <--- Fixed width. The ads stretch to match this height. */
+}
+
+/* Heading inside main content */
+.main-content h1 {
     text-align: center;
     color: #333;
     margin-bottom: 1rem;
@@ -54,7 +84,7 @@ h1 {
 }
 
 .form-group {
-    margin-bottom: 20px; /* Spacing between fields */
+    margin-bottom: 20px;
 }
 
 .form-group label {
@@ -74,33 +104,20 @@ input[type="password"] {
     border-radius: 4px;
 }
 
-/* Checkbox group (left-aligned checkbox) */
-.checkbox-group {
-    display: flex;
-    align-items: flex-start; /* Top-align label if multiple lines */
-    margin-bottom: 20px;
-}
-
-.checkbox-group input[type="checkbox"] {
-    width: auto;
-    margin-right: 10px;
-    margin-top: 4px; /* Slight offset to align with label text */
-}
-
 /* Button styling */
 button {
-    background-color: #0056b3;
+    background-color: #903474;  /* Matching the index button color */
     color: white;
     padding: 10px 20px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    width: 100%; 
+    width: 100%;
     font-size: 1rem;
 }
 
 button:hover {
-    background-color: #007bff;
+    background-color: #6b2856;  /* Slightly darker */
 }
 
 /* Paragraph & link styling */

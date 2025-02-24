@@ -18,6 +18,12 @@
 </head>
 <body>
 
+  <!-- Header (Logo + SnapSync Text) -->
+  <div class="header">
+    <img src="/static/images/Snapsync_logo.jpg" alt="SnapSync Logo" id="logo">
+    <h1>SnapSync</h1>
+  </div>
+
   <div class="container">
 
     <!-- Left Column: My Profile -->
@@ -27,6 +33,13 @@
         <img src="{{ my_profile.image }}" alt="{{ my_profile.name }}" class="profile-img">
         <h2 class="profile-name">{{ my_profile.name }}</h2>
         <p class="profile-location">{{ my_profile.location }}</p>
+      </div>
+
+      <!-- Logout button at bottom left -->
+      <div class="logout-btn-container">
+        <a class="logout-btn" href="/">
+          Logout
+        </a>
       </div>
       {% else %}
       <p>No profile found. Please create a profile.</p>
@@ -97,7 +110,7 @@
 
     /**
      * POST to /add_friend/<friend_id> to store friend relationship & do cross-path check.
-     * No alert or pop-up for crossing. We only see it in "Cross Paths" tab.
+     * No alert or pop-up for crossing. We only see it in "Syncs" tab.
      */
     function approveFriend(event, friendId) {
       event.preventDefault();
@@ -118,7 +131,7 @@
     }
 
     /**
-     * Displays the selected user's profile on the right side, with two tabs: Posts & Cross Paths
+     * Displays the selected user's profile on the right side, with two tabs: Posts & Syncs
      */
     function showUserDetail(event, userId, userName, userImage, userLocation) {
       event.preventDefault();
@@ -133,7 +146,7 @@
           <!-- Tabs -->
           <div class="tabs">
             <button class="tab-btn" onclick="showTab('posts')">Posts</button>
-            <button class="tab-btn" onclick="loadCrossPaths(${userId})">Cross Paths</button>
+            <button class="tab-btn" onclick="loadCrossPaths(${userId})">Syncs</button>
           </div>
 
           <!-- Tab contents -->
@@ -141,7 +154,7 @@
             <p>Posts content goes here...</p>
           </div>
           <div class="tab-content" id="crosspaths" style="display: none;">
-            <p>Loading cross paths...</p>
+            <p>Loading syncs...</p>
           </div>
         </div>
       `;
@@ -157,19 +170,18 @@
     }
 
     /**
-     * Load crossing path data into the Cross Paths tab
+     * Load crossing path data into the Syncs tab
      */
     function loadCrossPaths(friendId) {
-      // Switch to crosspaths tab
       showTab('crosspaths');
       const crosspathsDiv = document.getElementById("crosspaths");
-      crosspathsDiv.innerHTML = "<p>Loading cross paths...</p>";
+      crosspathsDiv.innerHTML = "<p>Loading syncs...</p>";
 
       fetch(`/cross_paths/${friendId}`)
         .then(response => response.json())
         .then(data => {
           if (!data.crossed_paths || data.crossed_paths.length === 0) {
-            crosspathsDiv.innerHTML = "<p>No crossing paths found.</p>";
+            crosspathsDiv.innerHTML = "<p>No syncs found.</p>";
           } else {
             let html = `
               <table class="cross-table">
@@ -212,45 +224,39 @@
         })
         .catch(err => {
           console.error(err);
-          crosspathsDiv.innerHTML = "<p>Error loading cross paths.</p>";
+          crosspathsDiv.innerHTML = "<p>Error loading syncs.</p>";
         });
     }
 
     /**
-     * Open the map modal with Leaflet, placing markers at lat1/lon1 and lat2/lon2 if they exist.
+     * Open the map modal with Leaflet
      */
     function openMapModal(lat1, lon1, lat2, lon2) {
-      // Show the modal so the container has layout
       const modal = document.getElementById("mapModal");
       modal.style.display = "block";
 
-      // 1) If a previous map instance exists, remove it
       if (map) {
         map.remove();
         map = null;
       }
 
-      // 2) Clear any leftover HTML inside mapContainer
       const mapContainer = document.getElementById("mapContainer");
       mapContainer.innerHTML = "";
 
-      // 3) Create a new Leaflet map
       map = L.map("mapContainer").setView([0, 0], 2);
-
-      // Use an alternate tile source (tile.openstreetmap.fr/hot)
       L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
         maxZoom: 19
       }).addTo(map);
 
       const latlngs = [];
 
-      // If lat1/lon1 is valid
+      // Marker 1
       if (lat1 != null && lon1 != null) {
         L.marker([lat1, lon1]).addTo(map)
           .bindPopup("Current user photo location");
         latlngs.push([lat1, lon1]);
       }
-      // If lat2/lon2 is valid
+      // Marker 2
       if (lat2 != null && lon2 != null) {
         L.marker([lat2, lon2]).addTo(map)
           .bindPopup("Friend photo location");
@@ -268,15 +274,13 @@
         map.fitBounds(latlngs, { maxZoom: 15 });
       }
 
-      // Force Leaflet to recalc map size after it’s visible
+      // Force Leaflet to recalc map size
       setTimeout(() => {
         map.invalidateSize();
       }, 100);
     }
 
-    /**
-     * Close the map modal
-     */
+    // Close the map modal
     function closeMapModal() {
       const modal = document.getElementById("mapModal");
       modal.style.display = "none";
