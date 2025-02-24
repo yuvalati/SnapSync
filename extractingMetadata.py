@@ -40,7 +40,8 @@ def get_longitude(tags):
 
 def geocode_location(lat, lon):
     # This is a placeholder function. You'll need an actual API key and use a real geocoding service.
-    response = requests.get(f"https://api.opencagedata.com/geocode/v1/json?q={lat}+{lon}&key=YOUR_API_KEY")
+    response = requests.get(f"https://api.opencagedata.com/geocode/v1/json?q={lat}+{lon}&"
+                            f"key=6fb9eb926a384d2980a9a488fa9fd626")
     data = response.json()
     if data['results']:
         city = data['results'][0]['components']['city']
