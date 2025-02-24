@@ -1,17 +1,19 @@
+import os
 from flask import Flask, render_template, request, redirect, url_for, jsonify
 from checkPaths import process_photos_and_check_paths_2directories
+import markdown
 
 app = Flask(__name__)
 
 # Dummy data for demonstration
 users = [
-    {"id": 1, "name": "Alice", "age": 29, "location": "Tel Aviv", "image": "/static/images/alice.jpg",
+    {"id": 1, "name": "Alice", "age": 29, "location": "United Kingdom", "image": "/static/images/alice.jpg",
      "gallery": "SnapUsers/Alice"},
-    {"id": 2, "name": "Bob", "age": 25, "location": "Tel Aviv", "image": "/static/images/bob.jpg",
+    {"id": 2, "name": "Bob", "age": 25, "location": "United Kingdom", "image": "/static/images/bob.jpg",
      "gallery": "SnapUsers/Bob"},
-    {"id": 3, "name": "Messi", "age": 24, "location": "Tel Aviv", "image": "/static/images/messi.jpg",
+    {"id": 3, "name": "Messi", "age": 24, "location": "United Kingdom", "image": "/static/images/messi.jpg",
      "gallery": "SnapUsers/Messi"},
-    {"id": 4, "name": "adele", "age": 27, "location": "Tel Aviv", "image": "/static/images/adele.jpg",
+    {"id": 4, "name": "adele", "age": 27, "location": "United Kingdom", "image": "/static/images/adele.jpg",
      "gallery": "SnapUsers/Adele"},
 ]
 
@@ -94,6 +96,18 @@ def cross_paths(friend_id):
         "crossed_paths": crossed_paths
     })
 
+
+@app.route('/privacy')
+def show_privacy():
+    md_path = os.path.join(app.root_path, 'PRIVACY.md')
+    with open(md_path, 'r', encoding='utf-8') as f:
+        md_text = f.read()
+
+    # Convert Markdown to HTML
+    html_content = markdown.markdown(md_text)
+
+    # Render a template that displays the HTML content
+    return render_template('privacy.html', content=html_content)
 
 if __name__ == '__main__':
     app.run(debug=True)
