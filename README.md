@@ -1,4 +1,4 @@
-# Snapsync ![Snapsync logo](https://github.com/user-attachments/assets/2b347ec3-e116-4449-931f-9350af713cc8)
+# Snapsync <img src="path/to/logo.png" width="100" alt="Snapsync Logo">
 Snapsync is an innovative social media platform designed to deepen connections by uncovering shared past experiences. Using advanced geolocation and timestamp analysis, Snapsync enables users to discover if they have unknowingly crossed paths ("synced") with friends or acquaintances at events, travels, or in everyday situations. This application not only enhances social interactions by revealing surprising coincidences but also adds a layer of nostalgia and excitement to rediscovering one's past through a modern, digital lens.
 
 ## Table of Contents
