@@ -3,31 +3,31 @@ Snapsync is an innovative social media platform designed to deepen connections b
 
 ## Table of Contents
 - [Introduction](#Introduction)
-Overview of SnapSync and its unique approach to social connectivity.
+Overview of Snapsync and its unique approach to social connectivity.
 
 - [Installation](#Installation)
-Instructions for downloading and setting up SnapSync on your device.
+Instructions for downloading and setting up Snapsync on your device.
 
 - [Usage](Usage#)
-Guidelines on how to use SnapSync, with practical examples and scenarios.
+Guidelines on how to use Snapsync, with practical examples and scenarios.
 
 - [Files Included](#Files-Included)
-Descriptions of the content and structure of the directories and files included in SnapSync.
+Descriptions of the content and structure of the directories and files included in Snapsync.
 
 - [Privacy and Security](#Privacy-and-Security)
-Detailed information on the privacy and security measures SnapSync employs to protect user data.
+Detailed information on the privacy and security measures Snapsync employs to protect user data.
 
 - [Busiess Model](#Business-Model)
-Explanation of the economic foundations of SnapSync, including its revenue streams.
+Explanation of the economic foundations of Snapsync, including its revenue streams.
 
 - [Competition](#Competition)
-Analysis of the competitive market landscape, highlighting SnapSync’s positioning relative to similar products.
+Analysis of the competitive market landscape, highlighting Snapsync’s positioning relative to similar products.
 
 - [Authors and Acknowledgment](#Authors-and-Acknowledgment)
-Credits to the team and contributors behind SnapSync.
+Credits to the team and contributors behind Snapsync.
 
 - [FAQs](#FAQs)
-Commonly asked questions about SnapSync with detailed answers to help users.
+Commonly asked questions about Snapsync with detailed answers to help users.
 
 
 ## Introduction
