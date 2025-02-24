@@ -11,19 +11,19 @@ Instructions for downloading and setting up SnapSync on your device.
 - [Usage](Usage#)
 Guidelines on how to use SnapSync, with practical examples and scenarios.
 
-- [Files Included](#Files Included)
+- [Files Included](#Files-Included)
 Descriptions of the content and structure of the directories and files included in SnapSync.
 
-- [Privacy and Security](#Privacy and Security)
+- [Privacy and Security](#Privacy-and-Security)
 Detailed information on the privacy and security measures SnapSync employs to protect user data.
 
-- [Business Model](#Business Model)
+- [Busiess Model](#Business-Model)
 Explanation of the economic foundations of SnapSync, including its revenue streams.
 
 - [Competition](#Competition)
 Analysis of the competitive market landscape, highlighting SnapSync’s positioning relative to similar products.
 
-- [Authors and Acknowledgment](#Authors and Acknowledgment)
+- [Authors and Acknowledgment](#Authors-and-Acknowledgment)
 Credits to the team and contributors behind SnapSync.
 
 - [FAQs](#FAQs)
