@@ -39,14 +39,36 @@ def get_longitude(tags):
 
 
 def geocode_location(lat, lon):
-    # This is a placeholder function. You'll need an actual API key and use a real geocoding service.
-    response = requests.get(f"https://api.opencagedata.com/geocode/v1/json?q={lat}+{lon}&"
-                            f"key=6fb9eb926a384d2980a9a488fa9fd626")
-    data = response.json()
-    if data['results']:
-        city = data['results'][0]['components']['city']
-        country = data['results'][0]['components']['country']
-        return city, country
+    """
+    This function calls OpenCage's Geocoding API to get city, country.
+    It gracefully handles cases where "city" isn't present by falling back to "town", "village", etc.
+    """
+    try:
+        response = requests.get(
+            f"https://api.opencagedata.com/geocode/v1/json?q={lat}+{lon}&key=6fb9eb926a384d2980a9a488fa9fd626"
+        )
+        data = response.json()
+
+        if data['results']:
+            # Extract the 'components' dict
+            components = data['results'][0].get('components', {})
+
+            # city might be named city, town, or village; handle gracefully
+            city = (
+                    components.get('city')
+                    or components.get('town')
+                    or components.get('village')
+                    or "Unknown City"
+            )
+
+            # country is usually present, but just in case, use get with a fallback
+            country = components.get('country', "Unknown Country")
+
+            return city, country
+    except Exception as e:
+        print(f"Geocoding error: {e}")
+
+    # If something fails or no results, return fallback
     return None, None
 
 
