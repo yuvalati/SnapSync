@@ -44,7 +44,7 @@ body {
     display: inline-block;
     padding: 0.8rem 1.2rem;
     margin: 1rem 0;
-    background: #0066cc;
+    background: #903474; /* Updated color */
     color: #fff;
     text-decoration: none;
     border-radius: 4px;
@@ -52,17 +52,59 @@ body {
 }
 
 .btn:hover {
-    background: #0052a3;
+    background: #6b2856; /* Slightly darker shade of #903474 */
 }
 
-/* Login container */
+/* Layout row for ads + login container */
+.layout-row {
+    display: flex;
+    justify-content: center;  /* Centers items horizontally */
+    align-items: flex-start;  /* Aligns items at the top */
+    gap: 2rem;                /* Space between columns */
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+/* Vertical ads on left and right */
+.vertical-ad {
+    width: 200px;
+    min-height: 500px; /* Tall vertical space */
+    background-color: #eee;
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+
+    /* Centers content horizontally & vertically */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    /* Keeps text aligned in the center horizontally if multi-line */
+    text-align: center;
+
+    padding: 1rem;
+}
+
+/* Wide advertisement bar at the bottom */
+.wide-ad {
+    width: 90%;
+    background-color: #eee;
+    margin: 3rem auto 0;
+    padding: 2rem;
+    border-radius: 4px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+/* Login container - made taller */
 .login-container {
     max-width: 400px;
     background: #fff;
-    margin: 2rem auto;
     padding: 2rem;
     border-radius: 8px;
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    min-height: 400px;       /* Increased min-height for a "longer" box */
+    margin: 0 auto;          /* In case we want to ensure center alignment if needed */
 }
 
 .login-container h2 {

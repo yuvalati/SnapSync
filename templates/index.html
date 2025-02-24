@@ -1,48 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Welcome to SnapSync</title>
-    <!-- Link your custom CSS -->
-    <link rel="stylesheet" href="/static/css/style.css">
+  <meta charset="UTF-8">
+  <title>Welcome to SnapSync</title>
+  <!-- Link your custom CSS -->
+  <link rel="stylesheet" href="/static/css/style.css">
 </head>
 <body>
-    <div class="header">
-        <img src="/static/images/Snapsync_logo.jpg" alt="SnapSync Logo" id="logo">
-        <h1>SnapSync</h1>
+
+  <!-- Header -->
+  <div class="header">
+    <img src="/static/images/Snapsync_logo.jpg" alt="SnapSync Logo" id="logo">
+    <h1>SnapSync</h1>
+  </div>
+
+  <!-- 3-column row: left ad, login container, right ad -->
+  <div class="layout-row">
+    <!-- Left ad frame -->
+    <div class="vertical-ad">
+      (Optional) Designated for advertisements
     </div>
 
     <!-- Login Form Section -->
     <div class="login-container">
-        <h2>Login</h2>
-        <form action="/login" method="POST">
-            <label for="username">Username</label>
-            <input
-                type="text"
-                id="username"
-                name="username"
-                placeholder="Enter your username"
-                required
-            >
+      <h2>Login</h2>
+      <form action="/login" method="POST" onsubmit="return false;">
+        <label for="username">Username</label>
+        <input
+          type="text"
+          id="username"
+          name="username"
+          placeholder="Enter your username"
+          required
+        >
 
-            <label for="password">Password</label>
-            <input
-                type="password"
-                id="password"
-                name="password"
-                placeholder="Enter your password"
-                required
-            >
+        <label for="password">Password</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          placeholder="Enter your password"
+          required
+        >
 
-            <button type="submit" class="btn login-btn">Login</button>
-        </form>
+        <!-- Clicking this button triggers an alert instead of a real login -->
+        <button
+          type="button"
+          class="btn login-btn"
+          onclick="alert('We are still working on the login feature!');"
+        >
+          Login
+        </button>
+      </form>
     </div>
 
-    <!-- Main Section -->
-    <div class="main">
-        <p>Connect with people you've crossed paths with.</p>
-        <!-- Keep the same functionality but rename the link -->
-        <a href="/profile" class="btn register-btn">Register</a>
+    <!-- Right ad frame -->
+    <div class="vertical-ad">
+      (Optional) Designated for advertisements
     </div>
+  </div>
+
+  <!-- Main Section (Register and Additional Text) -->
+  <div class="main">
+    <p>Connect with people you've crossed paths with.</p>
+    <a href="/profile" class="btn register-btn">Register</a>
+  </div>
+
+  <!-- Wide advertisement bar at the bottom -->
+  <div class="wide-ad">
+    (Optional) Designated for advertisements
+  </div>
+
 </body>
 </html>
