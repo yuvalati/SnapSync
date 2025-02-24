@@ -109,23 +109,40 @@
 
     /**
      * POST to /add_friend/<friend_id> to store friend relationship & do cross-path check.
+     *
+     * CHANGED --> We now update the button text/style immediately,
+     * then do the fetch in the background. If you want to revert on error,
+     * uncomment the lines in the catch block.
      */
     function approveFriend(event, friendId) {
       event.preventDefault();
       const btn = event.target;
 
+      // Immediately update the button UI
+      btn.textContent = "Approved";
+      btn.classList.add("approved");
+      btn.removeAttribute("href");
+      btn.style.pointerEvents = "none";
+
+      // Then do the actual call to /add_friend
       fetch(`/add_friend/${friendId}`, {
         method: "POST"
       })
       .then(response => response.json())
       .then(data => {
-        // Update button text/style
-        btn.textContent = "Approved";
-        btn.classList.add("approved");
-        btn.removeAttribute("href");
-        btn.style.pointerEvents = "none";
+        // If success, do nothing or log
+        console.log("Friend added successfully:", data);
       })
-      .catch(err => console.error(err));
+      .catch(err => {
+        console.error("Error adding friend:", err);
+        // If you want to revert the button in case of error, uncomment:
+        /*
+        btn.textContent = "Add Friend";
+        btn.classList.remove("approved");
+        btn.setAttribute("href", "#");
+        btn.style.pointerEvents = "auto";
+        */
+      });
     }
 
     /**
@@ -173,7 +190,14 @@
     function loadCrossPaths(friendId) {
       showTab('crosspaths');
       const crosspathsDiv = document.getElementById("crosspaths");
-      crosspathsDiv.innerHTML = "<p>Loading syncs...</p>";
+
+      // Show spinner while loading
+      crosspathsDiv.innerHTML = `
+        <div class="loading-spinner-container">
+          <div class="loading-spinner"></div>
+          <p>Loading syncs...</p>
+        </div>
+      `;
 
       fetch(`/cross_paths/${friendId}`)
         .then(response => response.json())
@@ -181,13 +205,12 @@
           if (!data.crossed_paths || data.crossed_paths.length === 0) {
             crosspathsDiv.innerHTML = "<p>No syncs found.</p>";
           } else {
-            // Build a table with "Location, DateTime, Details, Map"
             let html = `
               <table class="cross-table">
                 <thead>
                   <tr>
                     <th>Location</th>
-                    <th>DateTime</th>
+                    <th>Date</th>
                     <th>Details</th>
                     <th>Map</th>
                   </tr>
@@ -203,17 +226,16 @@
               // Combine city/country
               let locationStr = "Unknown";
               if (item.City || item.Country) {
-                // e.g. "Tel Aviv, Israel" or ", Israel" or "Tel Aviv, "
                 locationStr = `${item.City ?? ""}, ${item.Country ?? ""}`;
               }
 
-              // Show the chosen DateTime from the backend
-              const dateTimeStr = item.DateTime || "No DateTime";
+              // Use the date string from the backend (no time)
+              const dateStr = item.DateTime || "No Date";
 
               html += `
                 <tr>
                   <td>${locationStr}</td>
-                  <td>${dateTimeStr}</td>
+                  <td>${dateStr}</td>
                   <td>${item.Message}</td>
                   <td>
                     <button

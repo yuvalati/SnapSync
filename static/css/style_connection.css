@@ -7,7 +7,7 @@
   box-sizing: border-box;
 }
 
-/* Header styling to match other pages */
+/* Header styling */
 .header {
   display: flex;
   align-items: center;
@@ -39,26 +39,22 @@ body {
   min-height: 100vh;
 }
 
-/* Left column: My profile */
+/* Left column: My profile (20% width to free space for the right column) */
 .profile-section {
-  position: relative;  /* Allows absolute positioning of the logout button */
-  width: 25%;
+  width: 20%;
   background: #fff;
   padding: 20px;
   box-shadow: 2px 0 5px rgba(0,0,0,0.1);
   border-right: 1px solid #ddd;
-
   display: flex;
-  flex-direction: column; /* We'll keep the profile info in a column layout */
-  align-items: center;    /* Center profile image + text horizontally */
+  flex-direction: column;
+  justify-content: flex-start;
 }
 
-/* Profile header: now purely for image + name/loc */
 .profile-header {
   text-align: center;
 }
 
-/* Profile image */
 .profile-img {
   width: 200px;
   height: 200px;
@@ -67,7 +63,6 @@ body {
   margin-bottom: 1rem;
 }
 
-/* User name and location */
 .profile-name {
   font-size: 1.5rem;
   font-weight: bold;
@@ -79,16 +74,17 @@ body {
   color: #8e8e8e;
 }
 
-/* Logout button placed absolutely at top-left */
+/* Logout Button Container */
 .logout-btn-container {
-  position: absolute;
-  top: 1rem;     /* Moves it down from top edge */
-  left: 1rem;    /* Moves it in from left edge */
+  text-align: center;
+  margin-top: auto;
+  display: flex;
+  justify-content: center;
 }
 
-/* Logout button: gray background, white text */
 .logout-btn {
-  background-color: gray;
+  display: inline-block;
+  background-color: #903474;
   color: #fff;
   padding: 10px 20px;
   text-decoration: none;
@@ -99,12 +95,12 @@ body {
 }
 
 .logout-btn:hover {
-  background-color: #666; /* Darker gray on hover */
+  background-color: #6b2856;
 }
 
-/* Middle column: Suggestions */
+/* Middle column: Suggestions (20% width) */
 .suggestions-section {
-  width: 25%;
+  width: 20%;
   padding: 20px;
   border-right: 1px solid #ddd;
 }
@@ -136,25 +132,7 @@ body {
 .user-top-row {
   display: flex;
   align-items: center;
-  gap: 10px; /* space between the name link and friend button */
-}
-
-/* Make the name a clickable link */
-.username-link {
-  font-weight: bold;
-  font-size: 0.9rem;
-  text-decoration: none;
-  color: #000; /* black, or choose your color */
-}
-.username-link:hover {
-  text-decoration: underline;
-  color: #0095f6;
-}
-
-.location {
-  font-size: 0.8rem;
-  color: #8e8e8e;
-  margin-top: 2px;
+  gap: 10px;
 }
 
 /* "Add Friend" button -> Purple background */
@@ -184,9 +162,9 @@ body {
   cursor: default;
 }
 
-/* Right column: Detailed user view */
+/* Right column: Detailed user view (60% width) */
 .detail-section {
-  flex: 1; /* Fills remaining space */
+  width: 60%;
   padding: 20px;
 }
 
@@ -198,8 +176,8 @@ body {
 
 /* Detailed user card */
 .user-detail-card {
-  max-width: 400px;
-  margin: 0 auto; /* center horizontally */
+  max-width: 700px;
+  margin: 0 auto;
   text-align: center;
 }
 
@@ -251,27 +229,47 @@ body {
   padding: 10px;
 }
 
-/* Make the cross (sync) table modern looking */
+/* CROSS TABLE:
+   - 95% wide to fill space
+   - Fixed layout for consistent column widths
+   - Both headers & cells are centered horizontally
+   - The details column uses pre-wrap for multiline */
 .cross-table {
-  width: 100%;
+  width: 95%;
+  margin: 1rem auto;
   border-collapse: collapse;
-  margin-top: 10px;
+  table-layout: fixed;
   font-size: 0.9rem;
-  text-align: left;
 }
 
 .cross-table th,
 .cross-table td {
   border: 1px solid #ddd;
-  padding: 8px;
+  padding: 12px;
+  word-wrap: break-word;
+  text-align: center; /* <-- Center the text in each cell & header */
 }
 
-.cross-table thead {
-  background-color: #f2f2f2;
+/* Column widths add to 100% */
+.cross-table th:nth-child(1),
+.cross-table td:nth-child(1) {
+  width: 25%; /* Location */
 }
 
-.cross-table th {
-  font-weight: bold;
+.cross-table th:nth-child(2),
+.cross-table td:nth-child(2) {
+  width: 20%; /* Date */
+}
+
+.cross-table th:nth-child(3),
+.cross-table td:nth-child(3) {
+  width: 40%; /* Details */
+  white-space: pre-wrap; /* multiline for Distance + Time diff */
+}
+
+.cross-table th:nth-child(4),
+.cross-table td:nth-child(4) {
+  width: 15%; /* Map */
 }
 
 /* Map Icon Button */
@@ -287,21 +285,21 @@ body {
   height: 24px;
 }
 
-/* MODAL STYLES */
+/* MAP MODAL STYLES */
 .map-modal {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 9999; /* Sit on top */
+  display: none;
+  position: fixed;
+  z-index: 9999;
   left: 0;
   top: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0,0,0,0.5); /* Black w/ partial opacity */
+  background-color: rgba(0,0,0,0.5);
 }
 
 .map-modal-content {
   background-color: #fff;
-  margin: 10% auto; /* 10% from top, centered horizontally */
+  margin: 10% auto;
   padding: 30px;
   border-radius: 6px;
   width: 70%;
@@ -321,4 +319,31 @@ body {
 
 .close-btn:hover {
   color: #000;
+}
+
+/* LOADING SPINNER */
+.loading-spinner-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 5px solid #f3f3f3;
+  border-top: 5px solid #903474;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 10px;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }

@@ -1,6 +1,5 @@
 from datetime import datetime
 from math import radians, sin, cos, sqrt, atan2
-# If you need geocoding, ensure we import from extractingMetadata
 from extractingMetadata import process_photos, geocode_location
 
 
@@ -40,7 +39,7 @@ def check_crossing_paths(metadata1, metadata2, time_threshold=15, distance_thres
             "lon2": lon2
         }
 
-    # EXIF time format is usually "YYYY:MM:DD HH:MM:SS"
+    # EXIF time format: YYYY:MM:DD HH:MM:SS
     fmt = "%Y:%m:%d %H:%M:%S"
     t1 = datetime.strptime(time1, fmt)
     t2 = datetime.strptime(time2, fmt)
@@ -67,7 +66,7 @@ def check_crossing_paths(metadata1, metadata2, time_threshold=15, distance_thres
 
 def process_photos_and_check_paths(directory):
     metadata_list = process_photos(directory)
-    # Compare each pair of photos within the same directory
+    # Compare each pair in the same directory
     for i in range(len(metadata_list)):
         for j in range(i + 1, len(metadata_list)):
             result, message_data = check_crossing_paths(metadata_list[i], metadata_list[j])
@@ -85,24 +84,22 @@ def process_photos_and_check_paths_2directories(directory1, directory2):
         for meta2 in metadata_list2:
             result, message_data = check_crossing_paths(meta1, meta2)
             if result:
-                # Optionally geocode using lat1/lon1 (current user):
+                # Optionally geocode using lat1/lon1 (the "current user")
                 city, country = None, None
                 if message_data['lat1'] is not None and message_data['lon1'] is not None:
                     city, country = geocode_location(message_data['lat1'], message_data['lon1'])
 
-                # Reformat DateTime from the current user's photo (meta1) to dd-mm-yyyy HH:MM:SS
-                original_dt = meta1.get('DateTime')  # or meta2, if you prefer
+                # CHANGED: Only show date, no time
+                original_dt = meta1.get('DateTime')  # or meta2 if you prefer
                 date_to_show = "Unknown"
                 if original_dt:
                     try:
                         dt_obj = datetime.strptime(original_dt, "%Y:%m:%d %H:%M:%S")
-                        # Reformat
-                        date_to_show = dt_obj.strftime("%d-%m-%Y %H:%M:%S")
+                        date_to_show = dt_obj.strftime("%d-%m-%Y")  # day-month-year only
                     except Exception as e:
-                        print(f"Error parsing or formatting DateTime '{original_dt}': {e}")
+                        print(f"Error parsing/formatting DateTime '{original_dt}': {e}")
 
                 crossed_paths.append({
-                    # If you want to keep these old fields (File1, File2) just in JSON:
                     'File1': meta1.get('Filename', 'Unknown'),
                     'File2': meta2.get('Filename', 'Unknown'),
 
@@ -112,9 +109,10 @@ def process_photos_and_check_paths_2directories(directory1, directory2):
                     'Lat2': message_data['lat2'],
                     'Lon2': message_data['lon2'],
 
-                    # New/updated fields:
                     'City': city,
                     'Country': country,
+
+                    # CHANGED: store the new date string
                     'DateTime': date_to_show
                 })
 
