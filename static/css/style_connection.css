@@ -41,14 +41,16 @@ body {
 
 /* Left column: My profile (20% width to free space for the right column) */
 .profile-section {
-  width: 20%;
+  position: relative;  /* Allows absolute positioning of the logout button */
+  width: 25%;
   background: #fff;
   padding: 20px;
   box-shadow: 2px 0 5px rgba(0,0,0,0.1);
   border-right: 1px solid #ddd;
+
   display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
+  flex-direction: column; /* We'll keep the profile info in a column layout */
+  align-items: center;    /* Center profile image + text horizontally */
 }
 
 .profile-header {
@@ -76,15 +78,13 @@ body {
 
 /* Logout Button Container */
 .logout-btn-container {
-  text-align: center;
-  margin-top: auto;
-  display: flex;
-  justify-content: center;
+  position: absolute;
+  top: 1rem;     /* Moves it down from top edge */
+  left: 1rem;    /* Moves it in from left edge */
 }
 
 .logout-btn {
-  display: inline-block;
-  background-color: #903474;
+  background-color: gray;
   color: #fff;
   padding: 10px 20px;
   text-decoration: none;
@@ -95,7 +95,7 @@ body {
 }
 
 .logout-btn:hover {
-  background-color: #6b2856;
+  background-color: #666; /* Darker gray on hover */
 }
 
 /* Middle column: Suggestions (20% width) */
