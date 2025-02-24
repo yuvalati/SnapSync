@@ -1,24 +1,21 @@
-# Snapsync
+# Snapsync ![Snapsync logo](https://github.com/user-attachments/assets/2b347ec3-e116-4449-931f-9350af713cc8)
 Snapsync is an innovative social media platform designed to deepen connections by uncovering shared past experiences. Using advanced geolocation and timestamp analysis, Snapsync enables users to discover if they have unknowingly crossed paths ("synced") with friends or acquaintances at events, travels, or in everyday situations. This application not only enhances social interactions by revealing surprising coincidences but also adds a layer of nostalgia and excitement to rediscovering one's past through a modern, digital lens.
 
 ## Table of Contents
-- [Introduction](Introduction#)
-Overview of Snapsync and its unique approach to social connectivity.
-
-- [Installation](Installation#)
-Instructions for downloading and setting up Snapsync on your device.
-
-- [Files Included](Files-Included#)
-Descriptions of the content and structure of the directories and files included in Snapsync.
-
-- [Privacy and Security](Privacy-and-Security#)
-Detailed information on the privacy and security measures Snapsync employs to protect user data.
-
-- [Authors and Acknowledgment](Authors-and-Acknowledgment#)
-Credits to the team and contributors behind Snapsync.
-
-- [FAQs](FAQs#)
-Commonly asked questions about Snapsync with detailed answers to help users.
+- [Introduction](#introduction)
+  Overview of Snapsync and its unique approach to social connectivity.
+- [Installation](#installation)
+  Instructions for downloading and setting up Snapsync on your device.
+- [Usage](#usage)
+  How to operate Snapsync effectively, with examples and use cases to help users get started.
+- [Files Included](#files-included)
+  Descriptions of the content and structure of the directories and files included in Snapsync.
+- [Privacy and Security](#privacy-and-security)
+  Detailed information on the privacy and security measures Snapsync employs to protect user data.
+- [Authors and Acknowledgment](#authors-and-acknowledgment)
+  Credits to the team and contributors behind Snapsync.
+- [FAQs](#faqs)
+  Commonly asked questions about Snapsync with detailed answers to help users.
 
 
 ## Introduction
@@ -63,13 +60,14 @@ To get started with Snapsync, follow these simple steps:
     python app.py
 
 ## Usage
-
 Here's how to start using Snapsync:
 
 - **Launching the Application:**
   Run the application using the command line or by executing a script, depending on the platform.
   ```bash
   python app.py  # For Python applications
+
+![image](https://github.com/user-attachments/assets/cb2cd666-a611-43af-a16b-de76879a59b3)
 
 - Uploading Images: Navigate to the 'Upload' section in the application to add your images for syncing.
 
