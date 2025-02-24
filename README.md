@@ -2,19 +2,20 @@
 Snapsync is an innovative social media platform designed to deepen connections by uncovering shared past experiences. Using advanced geolocation and timestamp analysis, Snapsync enables users to discover if they have unknowingly crossed paths ("synced") with friends or acquaintances at events, travels, or in everyday situations. This application not only enhances social interactions by revealing surprising coincidences but also adds a layer of nostalgia and excitement to rediscovering one's past through a modern, digital lens.
 
 ## Table of Contents
-1. [Introduction](#introduction)
-   Overview of Snapsync and its unique approach to social connectivity.
-2. [Installation](#installation)
-   Instructions for downloading and setting up Snapsync on your device.
-4. [Usage](#usage)
-5. [Files Included](#files-included)
-   Descriptions of the content and structure of the directories and files included in Snapsync.
-6. [Privacy and Security](#privacy-and-security)
-   Detailed information on the privacy and security measures Snapsync employs to protect user data.
-7. [Authors and Acknowledgment](#authors-and-acknowledgment)
-   Credits to the team and contributors behind Snapsync.
-8. [FAQs](#faqs)
-   Commonly asked questions about Snapsync with detailed answers to help users.
+- [Introduction](#introduction)
+  Overview of Snapsync and its unique approach to social connectivity.
+- [Installation](#installation)
+  Instructions for downloading and setting up Snapsync on your device.
+- [Usage](#usage)
+  How to operate Snapsync effectively, with examples and use cases to help users get started.
+- [Files Included](#files-included)
+  Descriptions of the content and structure of the directories and files included in Snapsync.
+- [Privacy and Security](#privacy-and-security)
+  Detailed information on the privacy and security measures Snapsync employs to protect user data.
+- [Authors and Acknowledgment](#authors-and-acknowledgment)
+  Credits to the team and contributors behind Snapsync.
+- [FAQs](#faqs)
+  Commonly asked questions about Snapsync with detailed answers to help users.
 
 
 ## Introduction
