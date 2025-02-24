@@ -8,20 +8,11 @@ Overview of Snapsync and its unique approach to social connectivity.
 - [Installation](Installation#)
 Instructions for downloading and setting up Snapsync on your device.
 
-- [Usage](Usage#)
-Guidelines on how to use Snapsync, with practical examples and scenarios.
-
 - [Files Included](Files-Included#)
 Descriptions of the content and structure of the directories and files included in Snapsync.
 
 - [Privacy and Security](Privacy-and-Security#)
 Detailed information on the privacy and security measures Snapsync employs to protect user data.
-
-- [Busiess Model](Business-Model#)
-Explanation of the economic foundations of Snapsync, including its revenue streams.
-
-- [Competition](Competition#)
-Analysis of the competitive market landscape, highlighting Snapsync’s positioning relative to similar products.
 
 - [Authors and Acknowledgment](Authors-and-Acknowledgment#)
 Credits to the team and contributors behind Snapsync.
